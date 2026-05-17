@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="planer-web/planer-web.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>
