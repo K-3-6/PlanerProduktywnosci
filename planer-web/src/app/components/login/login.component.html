@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="$event.preventDefault(); onSubmit()" class="login-card">
+    <h2>Planer Produktywności - Logowanie</h2>
+    <p class="hint">Wpisz: admin / admin123</p>
+
+    <div class="form-group">
+      <label>Użytkownik</label>
+      <input type="text" formControlName="username" placeholder="Login">
+      <span *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['required']" class="error">Pole jest wymagane</span>
+    </div>
+
+    <div class="form-group">
+      <label>Hasło</label>
+      <input type="password" formControlName="password" placeholder="Hasło">
+      <span *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['minlength']" class="error">Hasło musi mieć min. 5 znaków</span>
+    </div>
+
+    <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit" [disabled]="loginForm.invalid">Zaloguj się</button>
+  </form>
+</div>

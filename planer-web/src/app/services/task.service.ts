@@ -15,7 +15,7 @@ export class TaskService {
       this.tasks = JSON.parse(savedTasks);
       this.tasksSubject.next(this.tasks);
     }
-  }
+  }  
 
   getTasks(): Observable<Task[]> {
     return this.tasksSubject.asObservable();
