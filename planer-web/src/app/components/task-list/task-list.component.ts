@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common'; // <-- Dodane
+import { FormsModule } from '@angular/forms'; // <-- Dodane dla ngModel
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule], // <-- To naprawi *ngFor, *ngIf oraz ngModel
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
 
-  // Zmienne powiązane z filtrami w HTML za pomocą [(ngModel)]
   filterStatus: string = 'Wszystkie';
   filterCategory: string = 'Wszystkie';
 

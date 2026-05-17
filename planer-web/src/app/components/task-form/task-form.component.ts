@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common'; // <-- Dodane
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // <-- Dodane
 import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule], // <-- To naprawi formGroup
   templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.scss']
+  styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent {
   taskForm: FormGroup;
