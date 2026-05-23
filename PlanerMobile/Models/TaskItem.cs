@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlanerDesktop.Models
+namespace PlanerMobile.Models
 {
     public class TaskItem
     {
