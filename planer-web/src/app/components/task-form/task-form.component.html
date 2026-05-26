@@ -1,0 +1,42 @@
+<div class="form-card">
+  <h3>Dodaj Nowe Zadanie</h3>
+  <form [formGroup]="taskForm" (ngSubmit)="$event.preventDefault(); onSubmit()">
+    <div class="form-group">
+      <label>Tytuł zadań *</label>
+      <input type="text" formControlName="title">
+    </div>
+
+    <div class="form-group">
+      <label>Opis</label>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label>Kategoria</label>
+        <select formControlName="category">
+          <option>Praca</option>
+          <option>Dom</option>
+          <option>Nauka</option>
+          <option>Inne</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Priorytet</label>
+        <select formControlName="priority">
+          <option>Niski</option>
+          <option>Średni</option>
+          <option>Wysoki</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Termin realizacji *</label>
+      <input type="date" formControlName="dueDate">
+    </div>
+
+    <button type="submit" [disabled]="taskForm.invalid">Utwórz zadanie</button>
+  </form>
+</div>

@@ -1,0 +1,48 @@
+<div class="list-card">
+  <h3>Twoje Zadania</h3>
+
+  <!-- Sekcja filtrów -->
+  <div class="filters">
+    <div>
+      <label>Status: </label>
+      <select [(ngModel)]="filterStatus" (change)="applyFilters()">
+        <option>Wszystkie</option>
+        <option>Nowe</option>
+        <option>W trakcie</option>
+        <option>Wykonane</option>
+      </select>
+    </div>
+    <div>
+      <label>Kategoria: </label>
+      <select [(ngModel)]="filterCategory" (change)="applyFilters()">
+        <option>Wszystkie</option>
+        <option>Praca</option>
+        <option>Dom</option>
+        <option>Nauka</option>
+        <option>Inne</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Wykaz zadań -->
+  <div class="task-grid">
+    <div *ngFor="let task of filteredTasks" class="task-item" [class.done]="task.status === 'Wykonane'">
+      <h4>{{ task.title }}</h4>
+      <p>{{ task.description }}</p>
+      <div class="meta">
+        <span>📂 {{ task.category }}</span>
+        <span>⚠️ {{ task.priority }}</span>
+        <span>📅 {{ task.dueDate }}</span>
+      </div>
+      <div class="actions">
+        <select [value]="task.status" (change)="updateStatus(task, $event)">
+          <option>Nowe</option>
+          <option>W trakcie</option>
+          <option>Wykonane</option>
+        </select>
+        <button class="btn-delete" (click)="deleteTask(task.id)">Usuń</button>
+      </div>
+    </div>
+    <p *ngIf="filteredTasks.length === 0">Brak zadań spełniających kryteria.</p>
+  </div>
+</div>

@@ -3,4 +3,6 @@
     <Build />
     <Deploy />
   </Project>
+  <Project Path="PlanerAPI/PlanerAPI.csproj" Id="0a6d20a7-9783-4e89-974a-3a2a155b2179" />
+  <Project Path="PlanerDesktop/PlanerDesktop.csproj" Id="5a97813e-cb26-4b0f-af57-4c1e61e31206" />
 </Solution>
