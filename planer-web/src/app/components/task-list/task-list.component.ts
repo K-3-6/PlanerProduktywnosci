@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <-- Dodane
-import { FormsModule } from '@angular/forms'; // <-- Dodane dla ngModel
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms'; 
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, FormsModule], // <-- To naprawi *ngFor, *ngIf oraz ngModel
+  imports: [CommonModule, FormsModule],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
@@ -40,9 +40,28 @@ export class TaskListComponent implements OnInit {
     this.taskService.updateTask(task);
   }
 
-  deleteTask(id: number): void {
-    if (confirm('Czy na pewno chcesz usunąć to zadanie?')) {
-      this.taskService.deleteTask(id);
+  deleteTask(task: any): void {
+    console.log('Pełny obiekt zadania odebrany z HTML:', task);
+
+    const taskId = task?.id !== undefined ? task.id : task?.Id;
+
+    if (taskId === undefined || taskId === null) {
+      console.error('Błąd: Nie udało się odnaleźć pola id ani Id w obiekcie!', task);
+      alert('Nie można usunąć zadania: brak identyfikatora.');
+      return;
     }
+
+    console.log('Wysyłam żądanie DELETE do API dla ID:', taskId);
+
+    this.taskService.deleteTask(taskId).subscribe({
+      next: () => {
+        console.log('Sukces! Zadanie usunięte z bazy danych.');
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Błąd serwera podczas usuwania:', err);
+        alert(`Serwer odrzucił żądanie. Status: ${err.status}`);
+      }
+    });
   }
 }

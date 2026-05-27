@@ -1,8 +1,14 @@
 <Solution>
+  <Folder Name="/Elementy rozwiązania/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="planer-web/planer-web.esproj">
     <Build />
     <Deploy />
   </Project>
   <Project Path="PlanerAPI/PlanerAPI.csproj" Id="0a6d20a7-9783-4e89-974a-3a2a155b2179" />
   <Project Path="PlanerDesktop/PlanerDesktop.csproj" Id="5a97813e-cb26-4b0f-af57-4c1e61e31206" />
+  <Project Path="PlanerMobile/PlanerMobile.csproj" Id="1b758e8c-d5f4-4a40-9803-f5a408e321d0">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>

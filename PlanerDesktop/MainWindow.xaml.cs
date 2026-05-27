@@ -11,7 +11,7 @@ namespace PlanerDesktop
     public partial class MainWindow : Window
     {
         // Adres URL Twojego działającego API z Etapu 2 (Upewnij się, że port w localhost jest poprawny!)
-        private readonly string apiUrl = "http://localhost:5000/api/tasks";
+        private readonly string apiUrl = "http://localhost:5216/api/tasks";
         private readonly HttpClient client = new HttpClient();
 
         public MainWindow()

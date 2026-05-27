@@ -1,50 +1,29 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Task } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private tasks: Task[] = [];
-  private tasksSubject = new BehaviorSubject<Task[]>([]);
+  private apiUrl = 'http://localhost:5216/api/tasks';
 
-  constructor() {
-    const savedTasks = localStorage.getItem('tasks');
-    if (savedTasks) {
-      this.tasks = JSON.parse(savedTasks);
-      this.tasksSubject.next(this.tasks);
-    }
-  }  
+  constructor(private http: HttpClient) { }
 
   getTasks(): Observable<Task[]> {
-    return this.tasksSubject.asObservable();
+    return this.http.get<Task[]>(this.apiUrl);
   }
 
-  addTask(task: Omit<Task, 'id'>): void {
-    const newTask: Task = {
-      ...task,
-      id: Date.now() // unikalne ID oparte na czasie
-    };
-    this.tasks.push(newTask);
-    this.saveAndRefresh();
+  addTask(task: Omit<Task, 'id'>): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, task);
   }
 
-  updateTask(updatedTask: Task): void {
-    const index = this.tasks.findIndex(t => t.id === updatedTask.id);
-    if (index !== -1) {
-      this.tasks[index] = updatedTask;
-      this.saveAndRefresh();
-    }
+  updateTask(updatedTask: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.apiUrl}/${updatedTask.id}`, updatedTask);
   }
 
-  deleteTask(id: number): void {
-    this.tasks = this.tasks.filter(t => t.id !== id);
-    this.saveAndRefresh();
-  }
-
-  private saveAndRefresh(): void {
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    this.tasksSubject.next([...this.tasks]);
+  deleteTask(id: number): Observable<void> {
+    return this.http.delete<void>(`${`${this.apiUrl}`}/${id}`);
   }
 }

@@ -40,7 +40,7 @@
           <option>W trakcie</option>
           <option>Wykonane</option>
         </select>
-        <button class="btn-delete" (click)="deleteTask(task.id)">Usuń</button>
+        <button class="btn-delete" (click)="deleteTask(task)">Usuń</button>
       </div>
     </div>
     <p *ngIf="filteredTasks.length === 0">Brak zadań spełniających kryteria.</p>

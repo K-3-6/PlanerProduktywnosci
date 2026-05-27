@@ -10,11 +10,9 @@ namespace PlanerMobile
 {
     public partial class MainPage : ContentPage
     {
-        // Używamy adresu 10.0.2.2, aby emulator Androida przekierował ruch na localhost komputera
         private readonly string apiUrl = "http://10.0.2.2:5216/api/tasks";
         private readonly HttpClient client = new HttpClient();
 
-        // Komenda do obsługi przycisku usuwania wewnątrz listy
         public ICommand DeleteTaskCommand { get; private set; }
 
         public MainPage()
